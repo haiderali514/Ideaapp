@@ -27,19 +27,24 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({ chatName, onOpenMoveModa
     }
 
     return (
-        <header className="project-header">
-            <span>{chatName}</span>
-            <div className="project-options-container" ref={optionsMenuRef}>
-                <button className="options-btn" onClick={() => setIsOptionsOpen(prev => !prev)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+        <header className="project-header" style={{position: 'relative', background: 'var(--bg-primary)'}}>
+            <span style={{fontWeight: 500}}>ChatGPT</span>
+            <div className="project-header-actions">
+                <button className="options-btn" title="Share">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
                 </button>
-                {isOptionsOpen && (
-                    <div className="options-dropdown">
-                        <button className="dropdown-item" onClick={() => handleAction(onOpenMoveModal)}>Move to Project</button>
-                        <button className="dropdown-item" onClick={() => handleAction(onOpenRenameModal)}>Rename</button>
-                        <button className="dropdown-item delete" onClick={() => handleAction(onDeleteChat)}>Delete Chat</button>
-                    </div>
-                )}
+                <div className="chat-options-container" ref={optionsMenuRef}>
+                    <button className="options-btn" onClick={() => setIsOptionsOpen(prev => !prev)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M5 10c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m14 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-7 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2"/></svg>
+                    </button>
+                    {isOptionsOpen && (
+                        <div className="options-dropdown">
+                            <button className="dropdown-item" onClick={() => handleAction(onOpenMoveModal)}>Add to project</button>
+                            <button className="dropdown-item" onClick={() => handleAction(onOpenRenameModal)}>Rename</button>
+                            <button className="dropdown-item delete" onClick={() => handleAction(onDeleteChat)}>Delete Chat</button>
+                        </div>
+                    )}
+                </div>
             </div>
         </header>
     );

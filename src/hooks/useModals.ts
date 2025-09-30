@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ChatData, ProjectFolder } from '../types';
 
 interface useModalsProps {

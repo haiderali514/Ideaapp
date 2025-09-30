@@ -13,8 +13,11 @@ export const ProjectChatList: React.FC<ProjectChatListProps> = ({ chatsInProject
         <ul className="project-chat-list-main">
             {chatsInProject.map(chat => (
                 <li key={chat.id} className="project-chat-list-item-main" onClick={() => onSelectChat(chat.id)}>
-                    <h3>{chat.name}</h3>
-                    <p>{chat.history[0]?.parts.find(p => p.text)?.text?.substring(0, 100) || '...'}</p>
+                    <div className="content">
+                        <h3>{chat.name}</h3>
+                        <p>{chat.history[0]?.parts.find(p => p.text)?.text || 'No messages yet...'}</p>
+                    </div>
+                    <div className="date">Sep 30</div>
                 </li>
             ))}
         </ul>

@@ -13,14 +13,20 @@ interface ProjectViewProps {
     onRemoveFile: (index: number) => void;
     onSelectChat: (chatId: string) => void;
     fileInputRef: React.RefObject<HTMLInputElement>;
+    onOpenRenameModal: () => void;
+    onOpenInstructionsModal: () => void;
+    onDeleteProject: () => void;
 }
 
 export const ProjectView: React.FC<ProjectViewProps> = (props) => {
     return (
         <div className="project-landing-view">
             <ProjectHeader 
-                projectName={props.project.name}
+                project={props.project}
                 fileInputRef={props.fileInputRef}
+                onOpenRenameModal={props.onOpenRenameModal}
+                onOpenInstructionsModal={props.onOpenInstructionsModal}
+                onDeleteProject={props.onDeleteProject}
             />
             <NewChatInput
                 project={props.project}

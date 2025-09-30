@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { ChatData, ProjectFolder, ChatPart, ChatHistoryItem } from '../types';
 import { callGeminiAPI } from '../services/geminiService';
+import { fileToBase64 } from '../utils/fileUtils';
 
 interface useChatHandlerProps {
     chats: ChatData[];
@@ -21,17 +22,6 @@ export const useChatHandler = ({ chats, setChats, projectFolders, activeChatId, 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const fileInputRef = useRef<HTMLInputElement>(null);
-
-    const fileToBase64 = (file: File): Promise<string> =>
-        new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                const result = reader.result as string;
-                resolve(result.split(',')[1]);
-            };
-            reader.onerror = (error) => reject(error);
-    });
 
     const handleSendMessage = async (message: string, chatId: string) => {
         if (!message.trim() && filesToSend.length === 0) return;

@@ -1,18 +1,55 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { ProjectFolder } from '../../../types';
 
 interface ProjectHeaderProps {
-    projectName: string;
+    project: ProjectFolder;
     fileInputRef: React.RefObject<HTMLInputElement>;
+    onOpenRenameModal: () => void;
+    onOpenInstructionsModal: () => void;
+    onDeleteProject: () => void;
 }
 
-export const ProjectHeader: React.FC<ProjectHeaderProps> = ({ projectName, fileInputRef }) => {
+export const ProjectHeader: React.FC<ProjectHeaderProps> = (props) => {
+    const { project, fileInputRef, onOpenRenameModal, onOpenInstructionsModal, onDeleteProject } = props;
+    const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+    const optionsMenuRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (optionsMenuRef.current && !optionsMenuRef.current.contains(event.target as Node)) {
+                setIsOptionsOpen(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
+    const handleAction = (action: () => void) => {
+        action();
+        setIsOptionsOpen(false);
+    }
+
     return (
         <header className="project-landing-header">
             <h1 className="project-landing-title">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                {projectName}
+                {project.name}
             </h1>
-            <button className="add-files-btn" onClick={() => fileInputRef.current?.click()}>Add files</button>
+            <div className="project-header-actions">
+                <button className="add-files-btn" onClick={() => fileInputRef.current?.click()}>Add files</button>
+                <div className="project-options-container" ref={optionsMenuRef}>
+                    <button className="options-btn" onClick={() => setIsOptionsOpen(prev => !prev)}>
+                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M5 10c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m14 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-7 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2"/></svg>
+                    </button>
+                    {isOptionsOpen && (
+                        <div className="options-dropdown">
+                            <button className="dropdown-item" onClick={() => handleAction(onOpenRenameModal)}>Edit project</button>
+                            <button className="dropdown-item" onClick={() => handleAction(onOpenInstructionsModal)}>Add instructions</button>
+                            <button className="dropdown-item delete" onClick={() => handleAction(onDeleteProject)}>Delete project</button>
+                        </div>
+                    )}
+                </div>
+            </div>
         </header>
     );
 };

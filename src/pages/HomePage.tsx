@@ -64,8 +64,6 @@ export const HomePage = () => {
     
     // Data Actions
     handleNewChat,
-    handleDeleteChat,
-    handleDeleteProject,
     setActiveChatId,
 
     // Navigation
@@ -126,6 +124,7 @@ export const HomePage = () => {
             onOpenRenameModal={openRenameModal}
             onOpenInstructionsModal={openInstructionsModal}
             onDeleteProject={(p) => openDeleteModal(p)}
+            onDeleteChat={(c) => openDeleteModal(c)}
         />
         <main className="main-content">
           {activeChat ? (
@@ -154,9 +153,20 @@ export const HomePage = () => {
                 onRemoveFile={removeFile}
                 onSelectChat={setActiveChatId}
                 fileInputRef={fileInputRef}
+                onOpenRenameModal={() => openRenameModal(activeProject)}
+                onOpenInstructionsModal={() => openInstructionsModal(activeProject)}
+                onDeleteProject={() => openDeleteModal(activeProject)}
               />
           ) : (
-            <PlaceholderView />
+            <PlaceholderView 
+                currentMessage={currentMessage}
+                setCurrentMessage={setCurrentMessage}
+                filesToSend={filesToSend}
+                isLoading={isLoading}
+                onFormSubmit={handleFormSubmit}
+                onRemoveFile={removeFile}
+                fileInputRef={fileInputRef}
+            />
           )}
         </main>
       </div>
