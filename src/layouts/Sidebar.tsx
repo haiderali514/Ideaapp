@@ -21,9 +21,9 @@ interface SidebarProps {
 }
 
 export const Sidebar: React.FC<SidebarProps> = (props) => {
-    const [expandedSections, setExpandedSections] = useState({ projects: true, chats: true });
+    const [expandedSections, setExpandedSections] = useState({ chats: true });
 
-    const toggleSection = (section: 'projects' | 'chats') => {
+    const toggleSection = (section: 'chats') => {
         setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }));
     };
 
@@ -43,9 +43,7 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
                 </div>
                 
                 <ProjectList 
-                    isExpanded={expandedSections.projects}
                     isSidebarExpanded={props.isSidebarExpanded}
-                    onToggle={() => toggleSection('projects')}
                     projectFolders={props.projectFolders}
                     chats={props.chats}
                     activeProjectId={props.activeProjectId}

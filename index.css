@@ -40,9 +40,19 @@
     .sidebar-section-header:hover { background-color: var(--bg-hover); }
     .sidebar-section-header .chevron { width: 16px; height: 16px; transition: transform 0.2s ease-in-out; }
     .sidebar-section-header.collapsed .chevron { transform: rotate(-90deg); }
-    .sidebar-section-header .add-project-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 2px; border-radius: 4px; display: flex; align-items: center; justify-content: center; }
-    .sidebar-section-header .add-project-btn:hover { background-color: #3f3f46; }
     .sidebar.collapsed .sidebar-section-header { opacity: 0; height: 0; margin: 0; padding: 0; overflow: hidden; }
+    .sidebar-section-title {
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+        padding: 0.75rem 1rem 0.25rem 1rem;
+        margin-top: 1rem;
+        white-space: nowrap;
+    }
+    .new-project-section {
+        padding-top: 0.25rem;
+        padding-bottom: 0.5rem;
+    }
     .project-list, .chat-list { list-style: none; overflow: hidden; max-height: 1000px; transition: max-height 0.3s ease-in-out; }
     .project-list.collapsed, .chat-list.collapsed { max-height: 0; }
     .chat-list-item:hover { background-color: var(--bg-hover); color: var(--text-primary); }
