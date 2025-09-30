@@ -10,6 +10,7 @@ import { NewProjectModal } from '../components/modals/NewProjectModal';
 import { InstructionsModal } from '../components/modals/InstructionsModal';
 import { MoveToProjectModal } from '../components/modals/MoveToProjectModal';
 import { DeleteConfirmModal } from '../components/modals/DeleteConfirmModal';
+import { ChatData } from '../types';
 
 export const HomePage = () => {
   const {
@@ -65,6 +66,7 @@ export const HomePage = () => {
     // Data Actions
     handleNewChat,
     setActiveChatId,
+    updateProject,
 
     // Navigation
     handleSelectProject,
@@ -93,7 +95,7 @@ export const HomePage = () => {
         instructions={currentInstructions}
         setInstructions={setCurrentInstructions}
       />
-      {activeChat && <MoveToProjectModal
+      {isMoveModalOpen && activeChat && <MoveToProjectModal
         isOpen={isMoveModalOpen}
         onClose={closeAllModals}
         onMove={handleMoveChat}
@@ -125,6 +127,7 @@ export const HomePage = () => {
             onOpenInstructionsModal={openInstructionsModal}
             onDeleteProject={(p) => openDeleteModal(p)}
             onDeleteChat={(c) => openDeleteModal(c)}
+            onOpenMoveModal={(c: ChatData) => openMoveModal(c)}
         />
         <main className="main-content">
           {activeChat ? (
@@ -139,7 +142,7 @@ export const HomePage = () => {
                 onFileChange={handleFileChange}
                 onRemoveFile={removeFile}
                 onOpenRenameModal={() => openRenameModal(activeChat)}
-                onOpenMoveModal={() => openMoveModal()}
+                onOpenMoveModal={() => openMoveModal(activeChat)}
                 onDeleteChat={() => openDeleteModal(activeChat)}
                 fileInputRef={fileInputRef}
              />
@@ -147,15 +150,16 @@ export const HomePage = () => {
               <ProjectView 
                 project={activeProject} 
                 chatsInProject={chats.filter(c => c.projectId === activeProject.id)} 
-                filesToSend={filesToSend}
-                isLoading={isLoading}
-                onNewMessageInProject={handleNewMessageInProject}
-                onRemoveFile={removeFile}
                 onSelectChat={setActiveChatId}
                 fileInputRef={fileInputRef}
                 onOpenRenameModal={() => openRenameModal(activeProject)}
                 onOpenInstructionsModal={() => openInstructionsModal(activeProject)}
                 onDeleteProject={() => openDeleteModal(activeProject)}
+                onUpdateProject={updateProject}
+                filesToSend={filesToSend}
+                isLoading={isLoading}
+                onNewMessageInProject={handleNewMessageInProject}
+                onRemoveFile={removeFile}
               />
           ) : (
             <PlaceholderView 

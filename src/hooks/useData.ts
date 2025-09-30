@@ -9,7 +9,7 @@ export const useData = () => {
     const [activeChatId, setActiveChatId] = useState<string | null>(null);
     const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
 
-    const handleNewChat = (projectId: string | null = null) => {
+    const handleNewChat = (projectId: string | null = null): string => {
         const newChat: ChatData = {
             id: Date.now().toString(),
             name: "New Chat",
@@ -19,6 +19,7 @@ export const useData = () => {
         setChats(prev => [newChat, ...prev]);
         setActiveChatId(newChat.id);
         setActiveProjectId(projectId);
+        return newChat.id;
     };
 
     const handleDeleteChat = (chatId: string) => {
@@ -41,6 +42,10 @@ export const useData = () => {
         }
     };
     
+    const updateProject = (projectId: string, data: Partial<ProjectFolder>) => {
+        setProjectFolders(prev => prev.map(p => p.id === projectId ? { ...p, ...data } : p));
+    };
+
     return {
         chats,
         setChats,
@@ -53,5 +58,6 @@ export const useData = () => {
         handleNewChat,
         handleDeleteChat,
         handleDeleteProject,
+        updateProject,
     };
 };

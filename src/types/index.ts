@@ -18,8 +18,18 @@ export interface ChatData {
   projectId?: string | null;
 }
 
+export interface UIComponent {
+  id: string;
+  prompt: string;
+  html: string;
+  css: string;
+}
+
 export interface ProjectFolder {
   id: string;
   name: string;
   instructions?: string;
+  problemStatement?: string;
+  features?: string[];
+  components?: UIComponent[];
 }

@@ -19,6 +19,7 @@ interface SidebarProps {
     onOpenInstructionsModal: (project: ProjectFolder) => void;
     onDeleteProject: (project: ProjectFolder) => void;
     onDeleteChat: (chat: ChatData) => void;
+    onOpenMoveModal: (chat: ChatData) => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = (props) => {
@@ -56,15 +57,11 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
                     isExpanded={projectsExpanded}
                     onToggle={() => setProjectsExpanded(prev => !prev)}
                     projectFolders={props.projectFolders}
-                    chats={props.chats}
                     activeProjectId={props.activeProjectId}
                     activeChatId={props.activeChatId}
                     onSelectProject={props.onSelectProject}
-                    onSelectChat={props.onSelectChat}
-                    onNewChat={props.onNewChat}
                     onNewProject={props.onNewProject}
                     onOpenRenameModal={props.onOpenRenameModal}
-                    onOpenInstructionsModal={props.onOpenInstructionsModal}
                     onDeleteProject={props.onDeleteProject}
                 />
 
@@ -77,6 +74,7 @@ export const Sidebar: React.FC<SidebarProps> = (props) => {
                     onSelectChat={props.onSelectChat}
                     onOpenRenameModal={props.onOpenRenameModal}
                     onDeleteChat={props.onDeleteChat}
+                    onOpenMoveModal={props.onOpenMoveModal}
                 />
             </div>
             <div className="sidebar-footer">

@@ -6,15 +6,11 @@ interface ProjectListProps {
     isExpanded: boolean;
     onToggle: () => void;
     projectFolders: ProjectFolder[];
-    chats: ChatData[];
     activeProjectId: string | null;
     activeChatId: string | null;
     onSelectProject: (projectId: string) => void;
-    onSelectChat: (chatId: string) => void;
-    onNewChat: (projectId?: string | null) => void;
     onNewProject: () => void;
-    onOpenRenameModal: (item: ChatData | ProjectFolder) => void;
-    onOpenInstructionsModal: (project: ProjectFolder) => void;
+    onOpenRenameModal: (item: ProjectFolder) => void;
     onDeleteProject: (project: ProjectFolder) => void;
 }
 
@@ -64,21 +60,21 @@ export const ProjectList: React.FC<ProjectListProps> = (props) => {
                     <span className="tooltip">New project</span>
                 </li>
                 {props.projectFolders.map(pf => (
-                    <li key={pf.id} className={`project-folder-item ${pf.id === props.activeProjectId && !props.activeChatId ? 'active' : ''}`}>
-                        <div className="project-folder-name" onClick={() => props.onSelectProject(pf.id)}>
+                    <li key={pf.id} className={`project-folder-item ${pf.id === props.activeProjectId && !props.activeChatId ? 'active' : ''}`} onClick={() => props.onSelectProject(pf.id)}>
+                        <div className="project-folder-name">
                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
                             {isSidebarExpanded && <span>{pf.name}</span>}
                             <span className="tooltip">{pf.name}</span>
                         </div>
                         {isSidebarExpanded && (
                             <div className="project-folder-actions" ref={activeProjectMenu === pf.id ? activeMenuRef : null}>
-                                <button className="item-options-btn" onClick={() => setActiveProjectMenu(pf.id === activeProjectMenu ? null : pf.id)}>
+                                <button className="item-options-btn" onClick={(e) => { e.stopPropagation(); setActiveProjectMenu(pf.id === activeProjectMenu ? null : pf.id)}}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M5 10c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m14 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2m-7 0c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2"/></svg>
                                 </button>
                                 {activeProjectMenu === pf.id && (
                                     <div className="options-dropdown">
-                                        <button className="dropdown-item" onClick={() => handleAction(() => props.onOpenRenameModal(pf))}>Rename project</button>
-                                        <button className="dropdown-item delete" onClick={() => handleAction(() => props.onDeleteProject(pf))}>Delete project</button>
+                                        <button className="dropdown-item" onClick={(e) => { e.stopPropagation(); handleAction(() => props.onOpenRenameModal(pf))}}>Rename project</button>
+                                        <button className="dropdown-item delete" onClick={(e) => { e.stopPropagation(); handleAction(() => props.onDeleteProject(pf))}}>Delete project</button>
                                     </div>
                                 )}
                             </div>

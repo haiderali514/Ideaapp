@@ -18,8 +18,19 @@ export interface ChatData {
   projectId?: string | null;
 }
 
+export interface UIComponent {
+  id: string;
+  prompt: string;
+  html: string;
+  css: string;
+}
+
+// FIX: Added optional problemStatement and features properties to align with usage across the app.
 export interface ProjectFolder {
   id: string;
   name: string;
   instructions?: string;
+  problemStatement?: string;
+  features?: string[];
+  components?: UIComponent[];
 }
