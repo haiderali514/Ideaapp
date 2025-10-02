@@ -1,0 +1,56 @@
+:root {
+  /* Color Palette - Inspired by Screenshots */
+  --bg-primary: #171717;      /* Main content background */
+  --bg-secondary: #000000;    /* Sidebar background */
+  --bg-tertiary: #1f1f1f;     /* Hover states, cards */
+  --bg-quaternary: #2f2f2f;  /* Borders, dividers */
+  --bg-input: #1f1f1f;        /* Input fields */
+  
+  --text-primary: #ececec;    /* Main text */
+  --text-secondary: #a0a0a0;  /* Secondary text, placeholders */
+  --text-tertiary: #6b6b6b;   /* Disabled text, tertiary info */
+  
+  --accent-primary: #a855f7;  /* Purple for main CTAs like "Get Plus" */
+  --accent-primary-hover: #9333ea;
+  --accent-secondary: #3b82f6; /* Blue for send button */
+
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --highlight: #2f2f2f;      /* Selected item background */
+
+  /* Typography */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystem-Font, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-size-xs: 0.75rem;  /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem;   /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem;  /* 20px */
+  
+  /* Spacing & Sizing */
+  --spacing-1: 0.25rem; /* 4px */
+  --spacing-2: 0.5rem;  /* 8px */
+  --spacing-3: 0.75rem; /* 12px */
+  --spacing-4: 1rem;    /* 16px */
+  --spacing-6: 1.5rem;  /* 24px */
+  --spacing-8: 2rem;    /* 32px */
+  
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-full: 9999px;
+  
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.2), 0 2px 4px -2px rgb(0 0 0 / 0.2);
+}
+
+/* --- Base Styles --- */
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+html, body, #root { height: 100%; overflow: hidden; }
+body { font-family: var(--font-family-sans); background-color: var(--bg-primary); color: var(--text-primary); font-size: var(--font-size-sm); line-height: 1.6; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--bg-quaternary); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #52525b; }

@@ -40,7 +40,6 @@ export const ChatView: React.FC<ChatViewProps> = (props) => {
                 filesToSend={props.filesToSend}
                 isLoading={props.isLoading}
                 onFormSubmit={props.onFormSubmit}
-                onFileChange={props.onFileChange}
                 onRemoveFile={props.onRemoveFile}
                 fileInputRef={props.fileInputRef}
             />

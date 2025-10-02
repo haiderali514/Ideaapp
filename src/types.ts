@@ -4,6 +4,12 @@ export interface ChatPart {
     mimeType: string;
     data: string;
   };
+  // NEW: Added type to support different message styles
+  type?: 'text' | 'thought' | 'action';
+  actionDetails?: {
+    title: string;
+    description: string;
+  }
 }
 
 export interface ChatHistoryItem {
@@ -25,12 +31,33 @@ export interface UIComponent {
   css: string;
 }
 
-// FIX: Added optional problemStatement and features properties to align with usage across the app.
+export interface Competitor {
+  name: string;
+  inspirations: string[];
+  opportunities: string[];
+}
+
+export interface ProjectAnalysis {
+  technologies: { name: string, reason: string }[];
+  uiuxStrategy: string;
+  competitorAnalysis: Competitor[];
+}
+
+export interface Feature {
+  text: string;
+  isMvp: boolean;
+  priority: 'low' | 'medium' | 'high';
+}
+
+
 export interface ProjectFolder {
   id: string;
   name: string;
   instructions?: string;
   problemStatement?: string;
-  features?: string[];
+  features?: Feature[];
   components?: UIComponent[];
+  status?: 'pending' | 'accepted' | 'rejected';
+  priority?: 'low' | 'medium' | 'high';
+  analysis?: ProjectAnalysis;
 }

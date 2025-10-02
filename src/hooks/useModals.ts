@@ -15,6 +15,7 @@ export const useModals = ({ chats, setChats, projectFolders, setProjectFolders, 
     const [isMoveModalOpen, setIsMoveModalOpen] = useState(false);
     const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
     const [isDeleteConfirmModalOpen, setIsDeleteConfirmModalOpen] = useState(false);
+    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
     const [renameInput, setRenameInput] = useState('');
     const [newProjectName, setNewProjectName] = useState('');
@@ -23,6 +24,7 @@ export const useModals = ({ chats, setChats, projectFolders, setProjectFolders, 
     const [itemToRename, setItemToRename] = useState<ChatData | ProjectFolder | null>(null);
     const [itemToDelete, setItemToDelete] = useState<ChatData | ProjectFolder | null>(null);
     const [projectForInstructions, setProjectForInstructions] = useState<ProjectFolder | null>(null);
+    const [chatToMove, setChatToMove] = useState<ChatData | null>(null);
 
     const closeAllModals = () => {
         setIsRenameModalOpen(false);
@@ -30,6 +32,8 @@ export const useModals = ({ chats, setChats, projectFolders, setProjectFolders, 
         setIsMoveModalOpen(false);
         setIsNewProjectModalOpen(false);
         setIsDeleteConfirmModalOpen(false);
+        setIsSettingsModalOpen(false);
+        setChatToMove(null);
     };
 
     const openNewProjectModal = () => setIsNewProjectModalOpen(true);
@@ -79,7 +83,10 @@ export const useModals = ({ chats, setChats, projectFolders, setProjectFolders, 
         }
     };
 
-    const openMoveModal = () => setIsMoveModalOpen(true);
+    const openMoveModal = (chat: ChatData) => {
+        setChatToMove(chat);
+        setIsMoveModalOpen(true);
+    };
     
     const handleMoveChat = (chatId: string, targetProjectId: string | null) => {
         setChats(prev => prev.map(c => c.id === chatId ? {...c, projectId: targetProjectId} : c));
@@ -94,16 +101,20 @@ export const useModals = ({ chats, setChats, projectFolders, setProjectFolders, 
         setItemToDelete(item);
         setIsDeleteConfirmModalOpen(true);
     };
+    
+    const openSettingsModal = () => setIsSettingsModalOpen(true);
 
     return {
-        isRenameModalOpen, isInstructionsModalOpen, isMoveModalOpen, isNewProjectModalOpen, isDeleteConfirmModalOpen,
+        isRenameModalOpen, isInstructionsModalOpen, isMoveModalOpen, isNewProjectModalOpen, isDeleteConfirmModalOpen, isSettingsModalOpen,
         renameInput, newProjectName, currentInstructions, itemToDelete,
+        chatToMove,
         setRenameInput, setNewProjectName, setCurrentInstructions,
         openNewProjectModal, handleNewProjectSubmit,
         openRenameModal, handleRenameModalSubmit,
         openInstructionsModal, handleInstructionsModalSubmit,
         openMoveModal, handleMoveChat,
         openDeleteModal, 
+        openSettingsModal,
         closeAllModals,
     };
 };

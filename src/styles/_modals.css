@@ -1,0 +1,77 @@
+/* --- Modals --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: var(--bg-tertiary);
+  padding: var(--spacing-6);
+  border-radius: var(--border-radius-lg);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--bg-quaternary);
+}
+.modal-content h2 {
+  margin-bottom: var(--spacing-4);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+}
+.modal-content p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-6);
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-6);
+}
+
+.modal-actions button {
+    padding: var(--spacing-2) var(--spacing-4);
+    font-weight: 500;
+}
+.modal-actions button[type="button"] {
+    background: var(--bg-quaternary);
+    color: var(--text-primary);
+    border: 1px solid var(--bg-quaternary);
+}
+.modal-actions button[type="button"]:hover {
+    background: #444;
+}
+.modal-actions button[type="submit"],
+.modal-actions .delete-confirm-btn {
+    background: var(--bg-primary);
+    color: white;
+    border: 1px solid var(--bg-quaternary);
+}
+.modal-actions button[type="submit"]:hover,
+.modal-actions .delete-confirm-btn:hover {
+    background: #222;
+}
+
+.modal-actions .delete-confirm-btn {
+    background: var(--danger);
+    border-color: var(--danger);
+}
+.modal-actions .delete-confirm-btn:hover {
+    background: var(--danger-hover);
+    border-color: var(--danger-hover);
+}

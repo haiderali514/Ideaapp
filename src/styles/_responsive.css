@@ -1,0 +1,34 @@
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    z-index: 100;
+    height: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  .sidebar.expanded-mobile {
+      transform: translateX(0);
+  }
+
+  /* This is a conceptual change, would require state management update in React */
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .builder-main-content {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-message {
+    max-width: 100%;
+  }
+}

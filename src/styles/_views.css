@@ -1,0 +1,277 @@
+/* --- Placeholder / Workspace View --- */
+.placeholder-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.placeholder-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 1;
+    color: var(--text-primary);
+}
+.placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+.placeholder-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+
+/* --- Project View --- */
+.tab-btn {
+    padding: var(--spacing-3) var(--spacing-4);
+    border: none;
+    background: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-bottom: 2px solid transparent;
+}
+.tab-btn.active {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+}
+.project-workflow-section {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+}
+.workflow-card {
+    background: var(--bg-tertiary);
+    padding: var(--spacing-6);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--bg-quaternary);
+}
+.workflow-heading h2 { font-size: 1.5rem; }
+.workflow-heading p { color: var(--text-secondary); margin-top: var(--spacing-1); }
+.workflow-actions { display: flex; gap: var(--spacing-3); margin-top: var(--spacing-4); }
+
+.status-management-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-tertiary);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--bg-quaternary);
+}
+.status-info { display: flex; flex-direction: column; gap: var(--spacing-2); }
+.status-info label { font-size: var(--font-size-sm); color: var(--text-secondary); }
+.status-badges { display: flex; align-items: center; gap: var(--spacing-2); }
+
+.status-actions { display: flex; align-items: center; gap: var(--spacing-3); }
+.status-actions select {
+    background-color: var(--bg-input);
+    border: 1px solid var(--bg-quaternary);
+    color: var(--text-primary);
+    padding: var(--spacing-2) var(--spacing-3);
+    border-radius: var(--border-radius-md);
+}
+
+.status-badge, .priority-badge {
+    padding: var(--spacing-1) var(--spacing-3);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.status-badge.pending { background-color: rgba(245, 158, 11, 0.1); color: var(--warning); }
+.status-badge.accepted { background-color: rgba(34, 197, 94, 0.1); color: var(--success); }
+.status-badge.rejected { background-color: rgba(239, 68, 68, 0.1); color: var(--danger); }
+
+.priority-badge.low { background-color: rgba(59, 130, 246, 0.1); color: #60a5fa; }
+.priority-badge.medium { background-color: rgba(245, 158, 11, 0.1); color: var(--warning); }
+.priority-badge.high { background-color: rgba(239, 68, 68, 0.1); color: var(--danger); }
+
+
+.feature-list ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+.feature-list li {
+    background: var(--bg-primary);
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-md);
+}
+
+.analysis-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+}
+.competitor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-4);
+}
+.competitor-card h4 { font-weight: 600; margin-bottom: var(--spacing-3); }
+.competitor-card h5 { font-weight: 500; color: var(--text-secondary); margin: var(--spacing-3) 0 var(--spacing-2); }
+.competitor-card ul { list-style-position: inside; padding-left: var(--spacing-2); }
+.competitor-card li { font-size: var(--font-size-sm); }
+
+/* Project View - Design Tab */
+.component-builder-container { display: flex; flex-direction: column; gap: var(--spacing-8); }
+.builder-main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-6);
+    height: 600px;
+}
+.builder-preview-panel, .builder-code-panel {
+    border: 1px solid var(--bg-quaternary);
+    border-radius: var(--border-radius-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+.panel-header {
+    padding: var(--spacing-3);
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--bg-quaternary);
+    font-weight: 500;
+}
+.builder-preview-iframe { width: 100%; height: 100%; border: none; }
+.builder-code-panel-content { padding: var(--spacing-4); overflow: auto; }
+.code-block h4 { margin-bottom: var(--spacing-2); }
+.code-block pre {
+    background-color: #000;
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-md);
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-size: var(--font-size-sm);
+}
+.component-library { margin-top: var(--spacing-8); }
+.saved-components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-4);
+}
+.saved-component-card .card-preview { height: 200px; }
+.saved-component-card .card-preview iframe { pointer-events: none; }
+.saved-component-card .card-info { padding: var(--spacing-3); background-color: var(--bg-tertiary); border-top: 1px solid var(--bg-quaternary); }
+
+/* Project View - Code Tab */
+.placeholder-tab { text-align: center; }
+.placeholder-tab .workflow-description { color: var(--text-secondary); }
+.placeholder-guidance { margin-top: var(--spacing-6); }
+.placeholder-guidance ul { 
+    list-style: none; 
+    text-align: left; 
+    max-width: 450px; 
+    margin: var(--spacing-4) auto; 
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--spacing-3); 
+}
+.placeholder-guidance ul li { 
+    color: var(--text-secondary); 
+    background: var(--bg-tertiary);
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--bg-quaternary);
+}
+
+
+/* Project View - Chats Tab */
+.project-chat-list-main {
+    list-style: none;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+.project-chat-list-item-main {
+    background-color: var(--bg-tertiary);
+    padding: var(--spacing-4);
+    border-radius: var(--border-radius-lg);
+    margin-bottom: var(--spacing-4);
+    border: 1px solid var(--bg-quaternary);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+.project-chat-list-item-main:hover {
+    border-color: var(--accent-primary);
+}
+.project-chat-list-item-main h3 { font-weight: 600; margin-bottom: var(--spacing-1); }
+.project-chat-list-item-main p { color: var(--text-secondary); font-size: var(--font-size-sm); }
+.project-chat-list-item-main .date { font-size: var(--font-size-sm); color: var(--text-tertiary); }
+
+
+/* --- Chat View --- */
+.chat-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+.chat-log {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+}
+.chat-message {
+    display: flex;
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-6);
+    max-width: 90%;
+    align-items: flex-start;
+}
+.chat-message.user {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+.message-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+}
+.message-bubble {
+    background-color: transparent;
+    padding: var(--spacing-3) var(--spacing-4);
+    border-radius: var(--border-radius-lg);
+}
+.chat-message.user .message-bubble {
+    background-color: var(--bg-tertiary);
+}
+.message-bubble p { margin-bottom: 1em; }
+.message-bubble p:last-child { margin-bottom: 0; }
+.message-bubble pre {
+    background-color: #000;
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-md);
+    margin: var(--spacing-3) 0;
+    overflow-x: auto;
+    border: 1px solid var(--bg-quaternary);
+}
+.chat-image-attachment {
+    max-width: 300px;
+    border-radius: var(--border-radius-md);
+}
+
+.empty-chat-placeholder {
+    margin: auto;
+    text-align: center;
+    color: var(--text-secondary);
+}
+.empty-chat-placeholder h2 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-2);
+}

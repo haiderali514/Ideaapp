@@ -1,0 +1,96 @@
+/* --- Forms & Inputs --- */
+.chat-form-container {
+    padding: var(--spacing-4);
+    padding-top: var(--spacing-2);
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+.chat-form-wrapper {
+    background-color: var(--bg-input);
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--bg-quaternary);
+}
+.chat-form {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--spacing-3);
+}
+.chat-textarea {
+    flex-grow: 1;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    resize: none;
+    padding: var(--spacing-1);
+    max-height: 200px;
+    overflow-y: auto;
+    line-height: 1.5;
+}
+.chat-textarea:focus {
+    outline: none;
+}
+.chat-textarea::placeholder {
+    color: var(--text-secondary);
+}
+
+textarea, input[type="text"], select {
+    width: 100%;
+    background-color: var(--bg-input);
+    border: 1px solid var(--bg-quaternary);
+    color: var(--text-primary);
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-md);
+    font-size: var(--font-size-base);
+}
+textarea:focus, input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.3);
+}
+
+/* --- File Previews --- */
+.file-preview-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-3);
+    padding-bottom: var(--spacing-2);
+}
+.file-preview-card {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--bg-quaternary);
+    max-width: 250px;
+}
+.file-icon { color: var(--text-secondary); }
+.file-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.file-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: var(--font-size-sm);
+}
+.file-size {
+    font-size: var(--font-size-xs);
+    color: var(--text-tertiary);
+}
+.remove-file-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    border-radius: var(--border-radius-full);
+}
+.remove-file-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--bg-quaternary);
+}

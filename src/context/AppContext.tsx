@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { useData } from '../hooks/useData';
 import { useModals } from '../hooks/useModals';
 import { useChatHandler } from '../hooks/useChatHandler';
 import { ChatData, ProjectFolder } from '../types';
 
 interface AppContextType extends ReturnType<typeof useData>, ReturnType<typeof useModals>, ReturnType<typeof useChatHandler> {
-    isSidebarExpanded: boolean;
+    isSidebarExpanded: boolean; // This can be repurposed for the new LeftPanel
     setIsSidebarExpanded: React.Dispatch<React.SetStateAction<boolean>>;
     activeChat: ChatData | undefined;
     activeProject: ProjectFolder | undefined;
@@ -31,8 +31,24 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     const handleSelectProject = (projectId: string) => {
         data.setActiveProjectId(projectId);
-        data.setActiveChatId(null);
+        const chatsInProject = data.chats.filter(c => c.projectId === projectId);
+        if (chatsInProject.length > 0) {
+            data.setActiveChatId(chatsInProject[0].id);
+        } else {
+            // If project has no chats, create one and set it as active
+            const newChatId = data.handleNewChat(projectId);
+            data.setActiveChatId(newChatId);
+        }
     };
+
+    // Effect to handle project deletion and state cleanup
+    useEffect(() => {
+        if (data.activeProjectId && !data.projectFolders.find(p => p.id === data.activeProjectId)) {
+            data.setActiveProjectId(null);
+            data.setActiveChatId(null);
+        }
+    }, [data.projectFolders, data.activeProjectId]);
+
 
     const value: AppContextType = {
         ...data,
