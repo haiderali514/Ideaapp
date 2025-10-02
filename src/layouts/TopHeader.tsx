@@ -3,17 +3,20 @@ import { ProjectFolder } from '../types';
 
 interface TopHeaderProps {
     activeProject: ProjectFolder | undefined;
+    onGoToWorkspace: () => void;
 }
 
-export const TopHeader: React.FC<TopHeaderProps> = ({ activeProject }) => {
+export const TopHeader: React.FC<TopHeaderProps> = ({ activeProject, onGoToWorkspace }) => {
     return (
         <header className="top-header">
             <div className="top-header-left">
                 {activeProject ? (
-                    <div>
-                        <h1 className="top-header-project-name">{activeProject.name}</h1>
-                        <p className="top-header-project-status">Previewing last saved version</p>
-                    </div>
+                    <button className="back-to-workspace-btn" onClick={onGoToWorkspace}>
+                        <div>
+                            <h1 className="top-header-project-name">{activeProject.name}</h1>
+                            <p className="top-header-project-status">Previewing last saved version</p>
+                        </div>
+                    </button>
                 ) : (
                     <h1 className="top-header-project-name">Dashboard</h1>
                 )}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAppContext } from '../../../context/AppContext';
 
 interface ActionableMessageProps {
     details: {
@@ -8,6 +9,8 @@ interface ActionableMessageProps {
 }
 
 export const ActionableMessage: React.FC<ActionableMessageProps> = ({ details }) => {
+    const { setMainViewMode } = useAppContext();
+    
     return (
         <div className="actionable-message">
             <div className="actionable-message-header">
@@ -24,7 +27,7 @@ export const ActionableMessage: React.FC<ActionableMessageProps> = ({ details })
                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6"></path><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
                     <span>Restore</span>
                 </button>
-                 <button className="action-btn">
+                 <button className="action-btn" onClick={() => setMainViewMode('code_editor')}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                     <span>Code</span>
                 </button>

@@ -24,8 +24,8 @@ export const useData = () => {
     const [chats, setChats] = useLocalStorage<ChatData[]>('chats', [sampleChat]);
     const [projectFolders, setProjectFolders] = useLocalStorage<ProjectFolder[]>('projectFolders', [sampleProject]);
   
-    const [activeChatId, setActiveChatId] = useState<string | null>(sampleChat.id);
-    const [activeProjectId, setActiveProjectId] = useState<string | null>(sampleProject.id);
+    const [activeChatId, setActiveChatId] = useState<string | null>(null);
+    const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
 
     const handleNewChat = (projectId: string | null = null): string => {
         const newChat: ChatData = {

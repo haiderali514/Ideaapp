@@ -1,22 +1,25 @@
 import React from 'react';
 import { ProjectFolder } from '../types';
 import { ProjectCard } from '../features/workspace/components/ProjectCard';
+import { CommunityProjectCard } from '../features/workspace/components/CommunityProjectCard';
 
 interface WorkspaceViewProps {
     projects: ProjectFolder[];
     onSelectProject: (projectId: string) => void;
+    onNewProject: () => void;
 }
 
 const FilterPill: React.FC<{ children: React.ReactNode, active?: boolean }> = ({ children, active }) => (
     <button className={`filter-pill ${active ? 'active' : ''}`}>{children}</button>
 );
 
-export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ projects, onSelectProject }) => {
+export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ projects, onSelectProject, onNewProject }) => {
     return (
         <div className="workspace-view">
             <div className="workspace-header">
                 <h2>h h h h h h h h h h's Workspace</h2>
                 <div className="workspace-filters">
+                    <button className="header-btn publish" onClick={onNewProject}>+ New Project</button>
                     <div className="search-projects">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                         <input type="text" placeholder="Search projects..." />
@@ -28,11 +31,19 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ projects, onSelect
                 <a href="#" className="view-all-link">View All</a>
             </div>
             
-            <div className="project-grid">
-                {projects.map(project => (
-                    <ProjectCard key={project.id} project={project} onSelectProject={onSelectProject} />
-                ))}
-            </div>
+            {projects.length > 0 ? (
+                <div className="project-grid">
+                    {projects.map(project => (
+                        <ProjectCard key={project.id} project={project} onSelectProject={onSelectProject} />
+                    ))}
+                </div>
+            ) : (
+                <div className="empty-workspace">
+                    <h3>No projects yet</h3>
+                    <p>Click "+ New Project" to get started.</p>
+                </div>
+            )}
+
 
             <div className="community-section">
                 <div className="community-header">
@@ -50,6 +61,28 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ projects, onSelect
                     <FilterPill>B2B App</FilterPill>
                     <FilterPill>Prototype</FilterPill>
                     <FilterPill>Image Gen</FilterPill>
+                </div>
+                <div className="community-project-grid">
+                    <CommunityProjectCard
+                        imageUrl="https://i.imgur.com/8QqdG5J.png"
+                        title="Atlas: Where Code Comes to Life"
+                        author="Lovable Staff"
+                    />
+                    <CommunityProjectCard
+                        imageUrl="https://i.imgur.com/B4Y3S5s.png"
+                        title="Crypto Dashboard"
+                        author="hhhh...lovable"
+                    />
+                    <CommunityProjectCard
+                        imageUrl="https://i.imgur.com/sM9r2It.png"
+                        title="Trade confidence & security"
+                        author="Lovable Staff"
+                    />
+                    <CommunityProjectCard
+                        imageUrl="https://i.imgur.com/Kq8mD7X.png"
+                        title="an e/a"
+                        author="Lovable Staff"
+                    />
                 </div>
             </div>
         </div>

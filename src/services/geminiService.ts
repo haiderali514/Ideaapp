@@ -1,4 +1,4 @@
-import { GoogleGenAI, Chat, Type } from "@google/genai";
+import { GoogleGenAI, Chat, Type, Content } from "@google/genai";
 import { ChatData, ProjectFolder, ProjectAnalysis, Feature } from '../types';
 
 const API_KEY = process.env.API_KEY;
@@ -53,19 +53,33 @@ export const generateProjectBlueprint = async (problemStatement: string): Promis
     try {
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
-            // FIX: Updated prompt to explicitly request JSON output since responseSchema cannot be used with googleSearch.
-            contents: `Analyze the following app idea and generate a project blueprint. Respond with a single, valid JSON object only. Problem: "${problemStatement}".
+            contents: `Analyze the following app idea and generate a project blueprint. Problem: "${problemStatement}".
+Respond with a single JSON object wrapped in a markdown code block (\`\`\`json ... \`\`\`).
 The JSON object must have these exact keys: "technologies", "uiuxStrategy", "competitorAnalysis".
 1.  "technologies": (Array of objects) Recommend a frontend framework, backend language/framework, and database. Each object must have "name" (string) and "reason" (string) keys.
 2.  "uiuxStrategy": (String) Briefly describe a good UI/UX approach. Mention layout, key components, and design principles.
 3.  "competitorAnalysis": (Array of objects) Use your search tool to find 2-3 real competitors. For each, provide 2-3 key strengths (as "inspirations", an array of strings) and 2-3 potential weaknesses/opportunities (as "opportunities", an array of strings). Each object must have "name" (string), "inspirations" (array of strings), and "opportunities" (array of strings) keys.`,
             config: {
                 tools: [{googleSearch: {}}],
-                // FIX: Removed responseMimeType and responseSchema as they are not allowed when using the googleSearch tool.
             },
         });
-        const jsonText = response.text.trim();
-        return JSON.parse(jsonText);
+        
+        let jsonText = response.text.trim();
+        // Robustly extract JSON from a markdown code block
+        const match = jsonText.match(/```json\s*([\s\S]*?)\s*```/);
+        if (match && match[1]) {
+            jsonText = match[1];
+        }
+
+        // Add a dedicated try-catch for parsing to prevent crashes from malformed JSON
+        try {
+            return JSON.parse(jsonText);
+        } catch (parseError) {
+            console.error("Failed to parse JSON from blueprint response:", parseError);
+            console.error("Original text from API:", jsonText);
+            return null; // Gracefully fail if JSON is malformed
+        }
+
     } catch (err) {
         console.error("Error generating project blueprint:", err);
         return null;
@@ -176,7 +190,22 @@ ${historySummary || 'No other chats in this project yet.'}
 You are currently in a chat titled "${currentChat.name}". Respond to the user's latest message with the full context of the project's memory.`;
         }
       
-        const historyForApi = currentChat.history.slice(0, -2); 
+        // Sanitize history for the API. Filter out UI-only messages (like 'thought' or 'action' types)
+        // and remove any app-specific fields from the parts.
+        const historyForApi = currentChat.history
+            .slice(0, -2) // Get all but the last two (new user message and model placeholder)
+            .filter(item => {
+                const firstPart = item.parts[0];
+                // Keep only items that have content the API can understand (text or inlineData).
+                return firstPart && (typeof firstPart.text === 'string' || firstPart.inlineData);
+            })
+            .map(item => ({
+                role: item.role,
+                // Only include `text` and `inlineData` properties in the parts.
+                parts: item.parts
+                    .map(({ text, inlineData }) => ({ text, inlineData }))
+                    .filter(p => (typeof p.text === 'string' || p.inlineData))
+            })) as Content[];
 
         const chat: Chat = ai.chats.create({
             model: 'gemini-2.5-flash',
@@ -184,7 +213,17 @@ You are currently in a chat titled "${currentChat.name}". Respond to the user's 
             config: { systemInstruction },
         });
         
-        const messageToSend = currentChat.history[currentChat.history.length - 2].parts;
+        // The message to send is the user's latest message, which also needs to be sanitized.
+        const messageToSend = currentChat.history[currentChat.history.length - 2].parts
+            .map(({ text, inlineData }) => ({ text, inlineData }))
+            .filter(p => (typeof p.text === 'string' || p.inlineData));
+
+        // Ensure we don't send an empty message if all parts were filtered out.
+        if (messageToSend.length === 0) {
+            onStreamEnd();
+            return;
+        }
+
         const stream = await chat.sendMessageStream({ message: messageToSend });
 
         for await (const chunk of stream) {
