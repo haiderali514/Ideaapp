@@ -44,15 +44,8 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     const handleSelectProject = (projectId: string) => {
         data.setActiveProjectId(projectId);
+        data.setActiveChatId(null); // This is the key change to show the chat list
         setMainViewMode('project_preview');
-        const chatsInProject = data.chats.filter(c => c.projectId === projectId);
-        if (chatsInProject.length > 0) {
-            data.setActiveChatId(chatsInProject[0].id);
-        } else {
-            // If project has no chats, create one and set it as active
-            const newChatId = data.handleNewChat(projectId);
-            data.setActiveChatId(newChatId);
-        }
     };
     
     const handleGoToWorkspace = () => {

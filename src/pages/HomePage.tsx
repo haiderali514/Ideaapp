@@ -88,11 +88,9 @@ export const HomePage = () => {
         case 'project_preview':
         default:
             return (
+                // FIX: Removed `chatsInProject`, `onSelectChat`, and `onUpdateProject` props as they are not accepted by `ProjectView`.
                 <ProjectView 
                     project={activeProject} 
-                    chatsInProject={chats.filter(c => c.projectId === activeProject.id)} 
-                    onSelectChat={setActiveChatId}
-                    onUpdateProject={updateProject}
                 />
             );
     }
@@ -144,9 +142,10 @@ export const HomePage = () => {
         <div className="app-body">
             {activeProject && (
               <LeftPanel 
-                  projects={projectFolders}
-                  onSelectProject={handleSelectProject}
-                  onNewProject={openNewProjectModal}
+                  chats={chats}
+                  activeProject={activeProject}
+                  handleNewChat={handleNewChat}
+                  setActiveChatId={setActiveChatId}
                   onOpenSettingsModal={openSettingsModal}
               />
             )}

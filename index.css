@@ -241,6 +241,77 @@ a { color: inherit; text-decoration: none; }
 }
 .left-panel-header h3 { font-weight: 600; font-size: var(--font-size-base); }
 
+/* Styles for Project Journal View (when no chat is active) */
+.project-journal-body {
+    padding: var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+.project-journal-actions {
+    margin-bottom: var(--spacing-4);
+    flex-shrink: 0;
+}
+.new-chat-in-project-btn {
+    width: 100%;
+    padding: var(--spacing-3);
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--bg-quaternary);
+    color: var(--text-primary);
+    border-radius: var(--border-radius-md);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+}
+.new-chat-in-project-btn:hover {
+    background-color: var(--bg-quaternary);
+}
+.project-chat-list {
+    list-style: none;
+    flex-grow: 1;
+    overflow-y: auto;
+    margin: 0 calc(var(--spacing-4) * -1);
+    padding: 0 var(--spacing-4);
+}
+.project-chat-list-item {
+    padding: var(--spacing-3);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.project-chat-list-item:hover {
+    background-color: var(--bg-tertiary);
+}
+.chat-item-name {
+    font-weight: 500;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: var(--spacing-1);
+}
+.chat-item-preview {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.chat-placeholder {
+    margin: auto;
+    text-align: center;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+
+/* Styles for Active Chat View */
 .chat-log { 
     flex-grow: 1; 
     overflow-y: auto; 
@@ -285,9 +356,10 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
   gap: var(--spacing-2);
   font-size: var(--font-size-sm);
+  font-weight: 500;
 }
 .action-btn:hover { background-color: #3f424b; }
-.action-btn.preview { background-color: var(--bg-secondary); border: 1px solid var(--bg-quaternary); }
+
 
 /* --- MESSAGE INPUT (JOURNAL) --- */
 .message-input-container {
@@ -535,42 +607,50 @@ a { color: inherit; text-decoration: none; }
 
 
 /* --- PROJECT VIEW (CANVAS) --- */
-.project-view-canvas { display: flex; flex-direction: column; height: 100%; }
-.canvas-header { 
-    padding: var(--spacing-3) var(--spacing-4); 
-    border-bottom: 1px solid var(--bg-quaternary); 
-    display: flex; 
+.project-hub-placeholder, .project-preview-placeholder {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    background-color: var(--bg-canvas-header);
-    flex-shrink: 0;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+    padding: var(--spacing-8);
 }
-.canvas-header h3 { display: flex; align-items: center; gap: var(--spacing-2); font-weight: 500; font-size: var(--font-size-sm); }
-.canvas-header-search { display: flex; align-items: center; gap: var(--spacing-2); background: var(--bg-tertiary); padding: var(--spacing-1) var(--spacing-2); border-radius: var(--border-radius-md); }
-.canvas-header-search input { background: transparent; border: none; outline: none; color: var(--text-primary); }
-
-.canvas-content-wrapper { flex-grow: 1; display: flex; }
-.canvas-sidebar-preview {
-    width: 240px;
-    background: var(--bg-canvas-preview);
-    padding: var(--spacing-4);
-    border-right: 1px solid var(--bg-quaternary);
+.hub-content, .preview-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-4);
+    max-width: 500px;
 }
-.canvas-sidebar-preview ul { list-style: none; display: flex; flex-direction: column; gap: var(--spacing-1); }
-.canvas-sidebar-preview li { padding: var(--spacing-2) var(--spacing-3); border-radius: var(--border-radius-md); }
-.canvas-sidebar-preview li:hover { background-color: var(--bg-tertiary); }
-.canvas-sidebar-preview li.active { background-color: var(--bg-tertiary); font-weight: 500; }
-.category-title { color: var(--text-secondary); font-size: var(--font-size-xs); font-weight: 500; padding: var(--spacing-4) var(--spacing-3) var(--spacing-2); }
-
-
-.canvas-content-preview { background-color: var(--bg-primary); color: var(--text-primary); padding: var(--spacing-6); flex-grow: 1; }
-.preview-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-4); }
-.preview-add-btn { background: var(--accent-blue); color: white; border: none; width: 28px; height: 28px; border-radius: var(--border-radius-md); font-size: 1.2rem; }
-.preview-input { background: transparent; border: 1px solid var(--bg-quaternary); color: white; padding: var(--spacing-2) var(--spacing-3); border-radius: var(--border-radius-md); width: 100%; margin-bottom: var(--spacing-4); }
-.preview-input:focus { border-color: var(--accent-blue); outline: none; }
-.preview-task-list { list-style: none; display: flex; flex-direction: column; gap: var(--spacing-3); }
-.preview-task-list li { display: flex; align-items: center; gap: var(--spacing-3); border-bottom: 1px solid var(--bg-quaternary); padding-bottom: var(--spacing-3); }
-.preview-task-list input[type="checkbox"] { accent-color: var(--accent-blue); width: 16px; height: 16px; }
+.hub-icon { color: var(--text-tertiary); }
+.hub-content h2, .preview-content h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.hub-content p, .preview-content p {
+    color: var(--text-secondary);
+}
+.hub-actions {
+    display: flex;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-4);
+}
+.hub-action-btn, .preview-content button {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--bg-quaternary);
+    color: var(--text-primary);
+    padding: var(--spacing-3) var(--spacing-6);
+    font-weight: 500;
+    border-radius: var(--border-radius-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+.hub-action-btn:hover, .preview-content button:hover {
+    background-color: var(--bg-quaternary);
+}
 
 /* --- CODE EDITOR VIEW --- */
 .code-editor-view {

@@ -1,55 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProjectFolder, ChatData } from '../../types';
+import { useAppContext } from '../../context/AppContext';
 
-interface ProjectViewProps {
-    project: ProjectFolder;
-    chatsInProject: ChatData[];
-    onSelectChat: (chatId: string) => void;
-    onUpdateProject: (projectId: string, data: Partial<ProjectFolder>) => void;
-}
+const ProjectPreview: React.FC<{onBack: () => void}> = ({ onBack }) => (
+    <div className="project-preview-placeholder">
+        <div className="preview-content">
+            <h3>App Preview</h3>
+            <p>Your generated app preview will appear here.</p>
+            <p>Interact with the AI in the journal to build components and see them live.</p>
+            <button onClick={onBack}>Back to Project Hub</button>
+        </div>
+    </div>
+);
 
 
-export const ProjectView: React.FC<ProjectViewProps> = (props) => {
-    const { project } = props;
+export const ProjectView: React.FC<{ project: ProjectFolder }> = ({ project }) => {
+    const { setMainViewMode } = useAppContext();
+    const [showPreview, setShowPreview] = useState(false);
+
+    if (showPreview) {
+        return <ProjectPreview onBack={() => setShowPreview(false)} />;
+    }
 
     return (
-        <div className="project-view-canvas">
-            <div className="canvas-header">
-                <h3><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg> TaskFlow</h3>
-                 <div className="canvas-header-search">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    <input type="text" placeholder="Search tasks..." />
+        <div className="project-hub-placeholder">
+            <div className="hub-content">
+                <div className="hub-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
                 </div>
-            </div>
-            <div className="canvas-content-wrapper">
-                 <div className="canvas-sidebar-preview">
-                    <ul>
-                        <li className="active">Inbox</li>
-                        <li>Today</li>
-                        <li>Pomodoro</li>
-                        <li>Completed</li>
-                    </ul>
-                    <h4 className="category-title">Categories</h4>
-                     <ul>
-                        <li>Work</li>
-                        <li>Personal</li>
-                        <li>Health</li>
-                        <li>Learning</li>
-                    </ul>
-                </div>
-                <div className="canvas-content-preview">
-                    <div className="preview-inbox">
-                        <div className="preview-header">
-                            <h4>Inbox</h4>
-                             <button className="preview-add-btn">+</button>
-                        </div>
-                         <input type="text" placeholder="Add a task..." className="preview-input" />
-                        <ul className="preview-task-list">
-                            <li><input type="checkbox" checked readOnly/> <span>Review project proposal</span></li>
-                            <li><input type="checkbox" readOnly/> <span>Morning workout routine</span></li>
-                             <li><input type="checkbox" readOnly/> <span>Learn React hooks</span></li>
-                        </ul>
-                    </div>
+                <h2>{project.name}</h2>
+                <p>Use the journal on the left to build your app. You can switch between the code and a live preview here.</p>
+                <div className="hub-actions">
+                    <button className="hub-action-btn" onClick={() => setShowPreview(true)}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        <span>Show Preview</span>
+                    </button>
+                    <button className="hub-action-btn" onClick={() => setMainViewMode('code_editor')}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        <span>View Code</span>
+                    </button>
                 </div>
             </div>
         </div>
