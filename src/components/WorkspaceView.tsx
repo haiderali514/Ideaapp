@@ -74,7 +74,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ projects, onSelect
                     <CommunityProjectCard
                         imageUrl="https://i.imgur.com/B4Y3S5s.png"
                         title="Crypto Dashboard"
-                        author={`${user ? user.name : 'hhhh'}...IdeaSpark AI`}
+                        author={user ? user.name : 'A User'}
                     />
                     <CommunityProjectCard
                         imageUrl="https://i.imgur.com/sM9r2It.png"

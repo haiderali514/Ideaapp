@@ -25,6 +25,9 @@ interface AppContextType extends ReturnType<typeof useData>, ReturnType<typeof u
     mainViewMode: MainViewMode;
     setMainViewMode: React.Dispatch<React.SetStateAction<MainViewMode>>;
     user: User | null;
+    isAuthPageVisible: boolean;
+    showAuthPage: () => void;
+    hideAuthPage: () => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -32,6 +35,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthPageVisible, setIsAuthPageVisible] = useState(false);
     const [mainViewMode, setMainViewMode] = useState<MainViewMode>('dashboard');
     const [user, setUser] = useState<User | null>(null);
 
@@ -46,14 +50,18 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     const activeChat = data.chats.find(c => c.id === data.activeChatId);
     const activeProject = data.projectFolders.find(p => p.id === data.activeProjectId);
+    
+    const showAuthPage = () => setIsAuthPageVisible(true);
+    const hideAuthPage = () => setIsAuthPageVisible(false);
 
     const handleLogin = () => {
         setIsAuthenticated(true);
         setUser({
-            name: "hhhhhhhhh",
-            initials: "H",
-            email: "gulzarhussain..."
+            name: "Gulzar Hussain",
+            initials: "GH",
+            email: "gulzar.hussain@ideaspark.ai"
         });
+        setIsAuthPageVisible(false);
     };
 
     const handleLogout = () => {
@@ -103,6 +111,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         mainViewMode,
         setMainViewMode,
         user,
+        isAuthPageVisible,
+        showAuthPage,
+        hideAuthPage,
     };
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

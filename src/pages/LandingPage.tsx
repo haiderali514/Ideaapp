@@ -3,7 +3,7 @@ import { useAppContext } from '../context/AppContext';
 import { LandingHeader } from '../layouts/LandingHeader';
 
 export const LandingPage: React.FC = () => {
-    const { handleLogin } = useAppContext();
+    const { showAuthPage } = useAppContext();
 
     return (
         <div className="landing-page-container">
@@ -12,12 +12,12 @@ export const LandingPage: React.FC = () => {
                 <div className="landing-pill">Your AI-powered idea accelerator ↗</div>
                 <h1>Spark your next big idea with AI</h1>
                 <p>Create apps and websites by chatting with AI.</p>
-                <div className="landing-input-wrapper" onClick={handleLogin}>
+                <div className="landing-input-wrapper" onClick={showAuthPage}>
                     <span>Ask IdeaSpark AI to create a dashboard to...</span>
                     <div className="landing-input-controls">
                         <div className="landing-input-left-controls">
                             <button>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                <svg xmlns="http://www.w.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
                                 Attach
                             </button>
                             <button>

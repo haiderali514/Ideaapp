@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAppContext } from '../context/AppContext';
 import { LandingPage } from './LandingPage'; 
+import { AuthPage } from './AuthPage';
 
 import { LeftPanel } from '../layouts/LeftPanel';
 import { TopHeader } from '../layouts/TopHeader';
@@ -19,6 +20,7 @@ export const HomePage = () => {
   const {
     // Auth State
     isAuthenticated,
+    isAuthPageVisible,
 
     // Data
     chats,
@@ -68,7 +70,7 @@ export const HomePage = () => {
   } = useAppContext();
 
   if (!isAuthenticated) {
-    return <LandingPage />;
+    return isAuthPageVisible ? <AuthPage /> : <LandingPage />;
   }
   
   const renderMainView = () => {
