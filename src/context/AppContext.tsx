@@ -21,6 +21,7 @@ interface AppContextType extends ReturnType<typeof useData>, ReturnType<typeof u
     handleGoToWorkspace: () => void;
     isAuthenticated: boolean;
     handleLogin: () => void;
+    handleLogout: () => void;
     mainViewMode: MainViewMode;
     setMainViewMode: React.Dispatch<React.SetStateAction<MainViewMode>>;
     user: User | null;
@@ -55,6 +56,27 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         });
     };
 
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        setUser(null);
+        data.setActiveProjectId(null);
+        data.setActiveChatId(null);
+        setMainViewMode('dashboard');
+    };
+
+    const handleSelectProject = (projectId: string) => {
+        data.setActiveProjectId(projectId);
+        data.setActiveChatId(null); 
+        setMainViewMode('project_preview');
+    };
+
+    const handleGoToWorkspace = () => {
+        data.setActiveProjectId(null);
+        data.setActiveChatId(null);
+        setMainViewMode('dashboard');
+    };
+
+
     // Effect to handle project deletion and state cleanup
     useEffect(() => {
         if (data.activeProjectId && !data.projectFolders.find(p => p.id === data.activeProjectId)) {
@@ -77,6 +99,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         handleGoToWorkspace,
         isAuthenticated,
         handleLogin,
+        handleLogout,
         mainViewMode,
         setMainViewMode,
         user,
