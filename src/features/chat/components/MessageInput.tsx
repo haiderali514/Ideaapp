@@ -59,7 +59,7 @@ export const MessageInput: React.FC<MessageInputProps> = (props) => {
                         value={currentMessage} 
                         onChange={(e) => setCurrentMessage(e.target.value)} 
                         onKeyDown={handleKeyDown} 
-                        placeholder="Ask Lovable..." 
+                        placeholder="Ask IdeaSpark AI..." 
                         rows={1} 
                     />
                     <div className="journal-controls-row">

@@ -1,6 +1,6 @@
 /* --- BASE STYLES --- */
 :root {
-  /* Color Palette - Lovable Inspired */
+  /* Color Palette - IdeaSpark AI */
   --bg-primary: #17181c;      /* Main canvas background */
   --bg-secondary: #0a0a0c;    /* Left panel background */
   --bg-tertiary: #1f2128;     /* Hover states, cards, inputs */
@@ -65,7 +65,7 @@ a { color: inherit; text-decoration: none; }
     height: 100%;
     width: 100%;
     background-color: var(--bg-landing);
-    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0), url('https://i.imgur.com/G5O5p2c.png');
+    background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0), url('https://images.unsplash.com/photo-1533134486753-c833f0ed4866?auto=format&fit=crop&w=2070&q=80');
     background-size: 3px 3px, cover;
     background-position: center center;
     display: flex;
@@ -109,7 +109,6 @@ a { color: inherit; text-decoration: none; }
     background: rgba(255,255,255,0.05);
 }
 .landing-hero h1 { font-size: 3.5rem; font-weight: 600; margin-bottom: var(--spacing-4); }
-.landing-hero .lovable-heart { color: var(--accent-purple-light); }
 .landing-hero > p { font-size: 1.25rem; color: var(--text-secondary); max-width: 600px; margin-bottom: var(--spacing-8); }
 
 .landing-input-wrapper {
@@ -121,7 +120,12 @@ a { color: inherit; text-decoration: none; }
     cursor: text;
 }
 .landing-input-wrapper span { color: var(--text-secondary); }
-.landing-input-controls { display: flex; align-items: center; gap: var(--spacing-3); margin-top: var(--spacing-4); }
+.landing-input-controls { display: flex; align-items: center; justify-content: space-between; margin-top: var(--spacing-4); }
+.landing-input-left-controls, .landing-input-right-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
 .landing-input-controls button {
     background: #363942;
     border: none;

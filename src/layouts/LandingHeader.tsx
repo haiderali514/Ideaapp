@@ -4,7 +4,7 @@ export const LandingHeader: React.FC = () => {
     return (
         <header className="landing-header">
             <div className="landing-header-left">
-                <span className="landing-header-logo">Lovable</span>
+                <span className="landing-header-logo">IdeaSpark AI</span>
                 <nav>
                     <a href="#">Community</a>
                     <a href="#">Pricing</a>
@@ -24,7 +24,7 @@ export const LandingHeader: React.FC = () => {
                 </div>
                  <div className="landing-header-user">
                     <button className="user-avatar-btn">H</button>
-                    <span className="username">hhhhhhhhh's Lovable</span>
+                    <span className="username">hhhhhhhhh's IdeaSpark AI</span>
                 </div>
             </div>
         </header>

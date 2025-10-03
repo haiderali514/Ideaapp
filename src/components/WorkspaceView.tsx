@@ -66,22 +66,22 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ projects, onSelect
                     <CommunityProjectCard
                         imageUrl="https://i.imgur.com/8QqdG5J.png"
                         title="Atlas: Where Code Comes to Life"
-                        author="Lovable Staff"
+                        author="IdeaSpark AI Staff"
                     />
                     <CommunityProjectCard
                         imageUrl="https://i.imgur.com/B4Y3S5s.png"
                         title="Crypto Dashboard"
-                        author="hhhh...lovable"
+                        author="hhhh...IdeaSpark AI"
                     />
                     <CommunityProjectCard
                         imageUrl="https://i.imgur.com/sM9r2It.png"
                         title="Trade confidence & security"
-                        author="Lovable Staff"
+                        author="IdeaSpark AI Staff"
                     />
                     <CommunityProjectCard
                         imageUrl="https://i.imgur.com/Kq8mD7X.png"
                         title="an e/a"
-                        author="Lovable Staff"
+                        author="IdeaSpark AI Staff"
                     />
                 </div>
             </div>
