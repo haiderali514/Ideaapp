@@ -6,6 +6,12 @@ import { ChatData, ProjectFolder } from '../types';
 
 type MainViewMode = 'dashboard' | 'project_preview' | 'code_editor';
 
+export interface User {
+    name: string;
+    initials: string;
+    email: string;
+}
+
 interface AppContextType extends ReturnType<typeof useData>, ReturnType<typeof useModals>, ReturnType<typeof useChatHandler> {
     isSidebarExpanded: boolean; // This can be repurposed for the new LeftPanel
     setIsSidebarExpanded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,6 +23,7 @@ interface AppContextType extends ReturnType<typeof useData>, ReturnType<typeof u
     handleLogin: () => void;
     mainViewMode: MainViewMode;
     setMainViewMode: React.Dispatch<React.SetStateAction<MainViewMode>>;
+    user: User | null;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -25,6 +32,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [mainViewMode, setMainViewMode] = useState<MainViewMode>('dashboard');
+    const [user, setUser] = useState<User | null>(null);
 
     const data = useData();
     const modals = useModals({
@@ -40,18 +48,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     const handleLogin = () => {
         setIsAuthenticated(true);
-    };
-
-    const handleSelectProject = (projectId: string) => {
-        data.setActiveProjectId(projectId);
-        data.setActiveChatId(null); // This is the key change to show the chat list
-        setMainViewMode('project_preview');
-    };
-    
-    const handleGoToWorkspace = () => {
-        data.setActiveProjectId(null);
-        data.setActiveChatId(null);
-        setMainViewMode('dashboard');
+        setUser({
+            name: "hhhhhhhhh",
+            initials: "H",
+            email: "gulzarhussain..."
+        });
     };
 
     // Effect to handle project deletion and state cleanup
@@ -78,6 +79,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         handleLogin,
         mainViewMode,
         setMainViewMode,
+        user,
     };
 
     return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

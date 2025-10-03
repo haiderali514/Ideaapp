@@ -2,6 +2,7 @@ import React from 'react';
 import { ProjectFolder } from '../types';
 import { ProjectCard } from '../features/workspace/components/ProjectCard';
 import { CommunityProjectCard } from '../features/workspace/components/CommunityProjectCard';
+import { useAppContext } from '../context/AppContext';
 
 interface WorkspaceViewProps {
     projects: ProjectFolder[];
@@ -14,10 +15,12 @@ const FilterPill: React.FC<{ children: React.ReactNode, active?: boolean }> = ({
 );
 
 export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ projects, onSelectProject, onNewProject }) => {
+    const { user } = useAppContext();
+    
     return (
         <div className="workspace-view">
             <div className="workspace-header">
-                <h2>h h h h h h h h h h's Workspace</h2>
+                <h2>{user ? `${user.name}'s Workspace` : "My Workspace"}</h2>
                 <div className="workspace-filters">
                     <button className="header-btn publish" onClick={onNewProject}>+ New Project</button>
                     <div className="search-projects">
@@ -71,7 +74,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({ projects, onSelect
                     <CommunityProjectCard
                         imageUrl="https://i.imgur.com/B4Y3S5s.png"
                         title="Crypto Dashboard"
-                        author="hhhh...IdeaSpark AI"
+                        author={`${user ? user.name : 'hhhh'}...IdeaSpark AI`}
                     />
                     <CommunityProjectCard
                         imageUrl="https://i.imgur.com/sM9r2It.png"

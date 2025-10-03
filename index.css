@@ -79,17 +79,71 @@ a { color: inherit; text-decoration: none; }
     flex-shrink: 0;
 }
 .landing-header-left, .landing-header-right { display: flex; align-items: center; gap: var(--spacing-6); }
+.landing-header-right { gap: var(--spacing-3); }
 .landing-header-logo { font-weight: 600; font-size: 1.25rem; }
 .landing-header nav { display: flex; gap: var(--spacing-6); }
 .landing-header nav a { color: var(--text-secondary); font-weight: 500; }
 .landing-header nav a:hover { color: var(--text-primary); }
-.landing-header-actions button { background: none; border: none; color: var(--text-secondary); }
-.landing-header-actions .user-avatar-btn {
-    width: 32px; height: 32px; background: var(--accent-blue);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-weight: 600;
+.landing-header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
 }
-.landing-header-actions .username { font-weight: 500; }
+.landing-header-actions button {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    padding: var(--spacing-1);
+    border-radius: var(--border-radius-sm);
+}
+.landing-header-actions button:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+.landing-header-user {
+    position: relative;
+}
+.user-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: var(--spacing-1);
+    border-radius: var(--border-radius-md);
+}
+.user-profile-btn:hover {
+    background-color: var(--bg-tertiary);
+}
+.user-avatar-btn {
+    width: 28px;
+    height: 28px;
+    background: var(--bg-tertiary);
+    border-radius: var(--border-radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border: 1px solid var(--bg-quaternary);
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+}
+.username {
+    font-weight: 500;
+}
+.profile-options-dropdown {
+    top: calc(100% + 8px);
+    right: 0;
+    width: 240px;
+}
+.profile-options-dropdown .dropdown-item {
+    font-size: var(--font-size-sm);
+}
+.profile-options-dropdown .dropdown-item svg {
+    color: var(--text-secondary);
+}
+
 
 .landing-hero {
     flex-grow: 1;
@@ -553,6 +607,10 @@ a { color: inherit; text-decoration: none; }
     height: 1px;
     background-color: var(--bg-quaternary);
     margin: var(--spacing-1) 0;
+}
+.dropdown-section {
+    display: flex;
+    flex-direction: column;
 }
 
 
